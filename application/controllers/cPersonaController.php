@@ -40,8 +40,12 @@
 			
 			}else{
 
+				$validateIn = $this->mpersona->validateIn($data);
+				$validateIn = $this->mpersona->get_by_or_arguments($validateIn);
 
-				  $idPersona = $this->mpersona->insert($data);
+				print_r($validateIn);
+
+				//$idPersona = $this->mpersona->insert($data);
 			
 			}
 

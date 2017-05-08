@@ -14,11 +14,15 @@ class MY_Model extends CI_Model
      * VARIABLES
      * ------------------------------------------------------------ */
 
+    /* this var content an array whit id key */
+    protected $_validateIn;
+
     /**
      * This model's default database table. Automatically
      * guessed by pluralising the model name.
      */
     protected $_table;
+
 
     /**
      * The database connection object. Will be set to the default
@@ -115,7 +119,28 @@ class MY_Model extends CI_Model
 
     /* --------------------------------------------------------------
      * CRUD INTERFACE  0102  0341 49 0100078939
-     * ------------------------------------------------------------ */
+     * -------
+
+    ----------------------------------------------------- */
+
+
+    public function get_by_or_arguments($params){
+
+        $sql_where_or = null;
+        $argFind = $this->_validateIn;
+
+        if (count($params)>=1){   
+
+            $this->db->where($argFind[0],$params[$argFind[0]]); 
+            array_shift($params);
+
+            foreach ($params as $key => $value){     
+            $this->db->or_where($key,$value);
+            }
+        }
+        return $sql_where_or;
+    }
+
 
     /**
      * Fetch a single record based on the primary key. Returns an object.
@@ -155,9 +180,6 @@ class MY_Model extends CI_Model
 
 
 
-
-
-
     /**
      * Fetch an array of records based on an array of primary values.
      */
@@ -175,14 +197,15 @@ class MY_Model extends CI_Model
     {
         $where = func_get_args();
 
-
         $this->_set_where($where);
 
         $this->db->order_by("1", "desc");
         
-        return $this->get_all();
+
+       return $this->get_all();
+
 				
-		    }
+	}
 
     /**
      * Fetch all the records in the table. Can be used as a generic call
@@ -264,6 +287,7 @@ class MY_Model extends CI_Model
             return $value;
 
     }
+
 
 
     /**
@@ -634,6 +658,12 @@ class MY_Model extends CI_Model
         return $this->_table;
     }
 
+    /**
+     * Getter for the name of field to validate no repit in a table bd
+     */
+  /*  public function validateIn(){
+        return $this->_validateIn;
+    }
     /* --------------------------------------------------------------
      * GLOBAL SCOPES
      * ------------------------------------------------------------ */
@@ -903,6 +933,7 @@ class MY_Model extends CI_Model
         {
             foreach ($params[0] as $field => $filter)
             {
+
                 if (is_array($filter))
                 {
                     $this->_database->where_in($field, $filter);

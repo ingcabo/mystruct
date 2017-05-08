@@ -3,10 +3,11 @@
 	/**
 	* 
 	*/
-	class Mpersona extends My_model
+	class Mpersona extends MY_Model
 	{
 		
 	protected $_table = 'persona';
+	protected $_validateIn = array("dni","email");
 	protected $primary_key = 'id';
 	protected $return_type = 'array';
 	protected $after_get = array('remove_sensite_data');
@@ -17,6 +18,7 @@
 		function __construct()
 		{
 			parent::__construct();
+			$this->load->helper('my_api_helper');
 		}
 
 		protected function remove_sensite_data($data){
@@ -37,14 +39,18 @@
 		}
 
 
+		function validateIn($param){
 
+		$data = remove_unknown_fields($param,$this->_validateIn);
 
-
-		public function guardar($tabla,$param){
-
+			return $data;
 		
+		}
 
-			$this->db->insert($tabla,$param);
+
+		public function guardar($param){
+
+			$this->db->insert($param);
 
 			return $this->db->insert_id();
 		}
