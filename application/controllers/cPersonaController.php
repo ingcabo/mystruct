@@ -33,6 +33,8 @@
 			   
 			$data = remove_unknown_fields($this->input->post(),$this->form_validation->get_field_names('persona_insert'));
 			$this->form_validation->set_data($data);
+			// field cant not repeat
+			$validateIn = $this->mpersona->validateIn($data);
 
 
 			if ($this->form_validation->run('persona_insert') == FALSE){
@@ -40,10 +42,12 @@
 			
 			}else{
 
-				$validateIn = $this->mpersona->validateIn($data);
-				$validateIn = $this->mpersona->get_by_or_arguments($validateIn);
+				
+				$validateData = $this->mpersona->get_by_or_arguments($validateIn);
 
-				print_r($validateIn);
+				$repet = repeatedData($validateIn,$validateData);
+
+				echo $repet;
 
 				//$idPersona = $this->mpersona->insert($data);
 			

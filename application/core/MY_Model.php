@@ -138,7 +138,7 @@ class MY_Model extends CI_Model
             $this->db->or_where($key,$value);
             }
         }
-        return $sql_where_or;
+        return $this->get_all();
     }
 
 

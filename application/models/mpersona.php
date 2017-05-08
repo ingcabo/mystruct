@@ -48,6 +48,7 @@
 		}
 
 
+
 		public function guardar($param){
 
 			$this->db->insert($param);
