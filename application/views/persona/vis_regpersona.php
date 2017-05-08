@@ -67,7 +67,7 @@
 
 				<td><label>usuario</label></td>
 				<td>
-					<input type="text" name="txtUser">
+					<input type="text" name="nomusuario">
 				</td>
 
 			</tr>
@@ -75,7 +75,7 @@
 
 				<td><label>clave</label></td>
 				<td>
-					<input type="password" name="txtClave">
+					<input type="password" name="clave">
 				</td>
 
 			</tr>

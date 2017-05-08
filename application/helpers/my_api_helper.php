@@ -42,7 +42,7 @@ function repeatedData($raw_data,$sql_result){
 			
 			if (isset($sql_result[$i][$key])){
 				if($value == $sql_result[$i][$key]){
-					$str = " El Campo ".$key." Ya contiene el Valor ".$sql_result[$i][$key]. " en la Base de datos <br>";	
+					$str = " El Campo <b>".$key."</b> Ya contiene el Valor <b>".$sql_result[$i][$key]. "</b> en la Base de datos <br>";	
 				}	
 			}
 		}	
