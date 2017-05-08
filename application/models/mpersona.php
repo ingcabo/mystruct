@@ -48,11 +48,4 @@
 		}
 
 
-
-		public function guardar($param){
-
-			$this->db->insert($param);
-
-			return $this->db->insert_id();
-		}
 	}

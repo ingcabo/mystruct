@@ -33,7 +33,7 @@
 			   
 			$data = remove_unknown_fields($this->input->post(),$this->form_validation->get_field_names('persona_insert'));
 			$this->form_validation->set_data($data);
-			// field cant not repeat
+			// field cant not repeat in Db
 			$validateIn = $this->mpersona->validateIn($data);
 
 
@@ -42,20 +42,17 @@
 			
 			}else{
 
-				
+				// if the unique fields are to be repeated in the database
 				$validateData = $this->mpersona->get_by_or_arguments($validateIn);
 
-				$repet = repeatedData($validateIn,$validateData);
-
-				echo $repet;
-
-				//$idPersona = $this->mpersona->insert($data);
-			
+				if (count($validateData) > 0){
+					$msg = repeatedData($validateIn,$validateData);
+				}else{
+					$idPersona = $this->mpersona->insert($data);
+				}				
+		
 			}
 
-			//array_pop
-			//	var_dump($data);
-			
 		
 		}
 	}
